@@ -2,16 +2,11 @@ package main
 
 import (
 	"fmt"
+
+	"github.com/socialrating/go-course/hw-01/maths"
 )
 
 func main() {
-	first := 10
-	second := 20
-	sum := first + second
-
-	suma := 10
-	sumb := sum - suma
-
-	fmt.Println("Результат сложения:", sum)
-	fmt.Println("Результат вычитания:", sumb)
+	fmt.Println("Результат сложения:", maths.Sum)
+	fmt.Println("Результат вычитания:", maths.A)
 }
