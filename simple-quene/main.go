@@ -59,6 +59,9 @@ func main() {
 		line := scanner.Text()
 		parts := strings.Fields(line)
 		command := parts[0]
+		if len(parts) == 0 {
+			continue
+		}
 		switch command {
 		case "add":
 			queue.Add(parts[1])
