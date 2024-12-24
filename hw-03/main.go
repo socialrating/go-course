@@ -10,28 +10,41 @@ type Man struct {
 	Crimes   int
 }
 
+func NewMan(name, lastName string, age int, gender string, crimes int) Man {
+	return Man{
+		Name:     name,
+		LastName: lastName,
+		Age:      age,
+		Gender:   gender,
+		Crimes:   crimes,
+	}
+}
+
 func main() {
 	people := map[string]Man{
-		"Анна":      {Name: "Анна", LastName: "Воронина", Age: 33, Gender: "female", Crimes: 3},
-		"Дмитрий":   {Name: "Дмитрий", LastName: "Соколов", Age: 29, Gender: "male", Crimes: 0},
-		"Михаил":    {Name: "Михаил", LastName: "Журавлев", Age: 45, Gender: "male", Crimes: 5},
-		"Елизавета": {Name: "Елизавета", LastName: "Ковальская", Age: 25, Gender: "female", Crimes: 2},
-		"Ольга":     {Name: "Ольга", LastName: "Ромашова", Age: 16, Gender: "female", Crimes: 1},
+		"Анна":      NewMan("Анна", "Воронина", 33, "female", 3),
+		"Дмитрий":   NewMan("Дмитрий", "Соколов", 29, "male", 0),
+		"Михаил":    NewMan("Михаил", "Журавлев", 45, "male", 5),
+		"Елизавета": NewMan("Елизавета", "Ковальская", 25, "female", 2),
+		"Ольга":     NewMan("Ольга", "Ромашова", 16, "female", 1),
 	}
 
 	suspects := []string{"Анна", "Елизавета", "Михаил"}
 
 	var mostCriminal Man
 	for _, name := range suspects {
-		if person, ok := people[name]; ok {
-			if person.Crimes > mostCriminal.Crimes {
-				mostCriminal = person
-			}
+		person, ok := people[name]
+		if !ok {
+			continue 
+		}
+
+		if person.Crimes > mostCriminal.Crimes {
+			mostCriminal = person
 		}
 	}
 
 	if mostCriminal.Name != "" {
-		fmt.Println("Наиболее криминальная личность:" , mostCriminal.Name, mostCriminal.LastName, "количество преступлений:", mostCriminal.Crimes)
+		fmt.Println("Наиболее криминальная личность:", mostCriminal.Name, mostCriminal.LastName, "количество преступлений:", mostCriminal.Crimes)
 	} else {
 		fmt.Println("В базе данных нет информации по запрошенным подозреваемым.")
 	}
